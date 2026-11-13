@@ -48,8 +48,12 @@
   const form = document.querySelector('.contact-form');
 
   if (form) {
-    // Forminit: ID nach dem Erstellen des Formulars im Dashboard eintragen.
-    const FORMINIT_FORM_ID = 'DEINE_FORMINIT_FORM_ID';
+    // Public Form ID: no API key is needed for a client-side Forminit form.
+    const FORM_ID = 'nhborn9zfl9';
+    const forminit = typeof window.Forminit === 'function' ? new window.Forminit() : null;
+    const button = form.querySelector('button[type="submit"]');
+    const feedback = form.querySelector('.form-feedback');
+    let isSubmitting = false;
 
     const uploadInputs = [
       {
@@ -62,7 +66,8 @@
       }
     ];
 
-    const maxTotalSize = 25 * 1024 * 1024;
+    // Keep below Forminit's 25 MB request limit to leave room for form data.
+    const maxTotalSize = 24 * 1024 * 1024;
 
     const formatSize = (bytes) => {
       if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
@@ -90,12 +95,25 @@
       if (input) input.addEventListener('change', renderFileLists);
     });
 
+    const FIELD_ERRORS = {
+      'sender.firstName': 'Bitte verwende im Vornamen nur Buchstaben, Leerzeichen, Bindestriche, Apostrophe oder Punkte.',
+      'sender.lastName': 'Bitte verwende im Nachnamen nur Buchstaben, Leerzeichen, Bindestriche, Apostrophe oder Punkte.',
+      'sender.email': 'Bitte gib eine gültige E-Mail-Adresse ein.',
+      'date.deadline': 'Bitte gib ein gültiges Datum ein.'
+    };
+
+    const getErrorMessage = (error) => {
+      const fieldName = error?.fieldName || error?.message?.match(/'([^']+)'/)?.[1];
+      if (fieldName && FIELD_ERRORS[fieldName]) return FIELD_ERRORS[fieldName];
+      if (error?.code === 'TOO_MANY_REQUESTS' || error?.error === 'TOO_MANY_REQUESTS') {
+        return 'Bitte warte einige Sekunden und versuche es anschließend erneut.';
+      }
+      return 'Deine Anfrage konnte leider nicht gesendet werden. Bitte prüfe deine Angaben und versuche es erneut.';
+    };
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
-      const button = form.querySelector('button[type="submit"]');
-      const feedback = form.querySelector('.form-feedback');
-
+      if (isSubmitting) return;
       if (!form.reportValidity()) return;
 
       const totalSize = uploadInputs.reduce((total, { input }) => {
@@ -103,45 +121,60 @@
       }, 0);
 
       if (totalSize > maxTotalSize) {
-        feedback.textContent = 'Die ausgewählten Bilder sind zusammen größer als 25 MB. Bitte wähle weniger oder kleinere Dateien aus.';
+        feedback.textContent = 'Die ausgewählten Bilder sind zusammen größer als 24 MB. Bitte wähle weniger oder kleinere Dateien aus.';
         feedback.classList.add('error');
+        feedback.classList.remove('success');
         return;
       }
 
-      if (FORMINIT_FORM_ID === 'DEINE_FORMINIT_FORM_ID') {
-        feedback.textContent = 'Bitte trage zuerst deine Forminit-Formular-ID in der script.js ein.';
-        feedback.classList.add('error');
-        return;
-      }
-
-      if (typeof window.Forminit !== 'function') {
+      if (!forminit) {
         feedback.textContent = 'Das Formular konnte gerade nicht geladen werden. Bitte lade die Seite neu und versuche es erneut.';
         feedback.classList.add('error');
+        feedback.classList.remove('success');
         return;
       }
 
-      const originalButton = button.innerHTML;
+      // Build FormData before disabling the button; disabled controls are omitted.
+      const fd = new FormData(form);
+
+      // Forminit sender-name validation accepts straight apostrophes only.
+      for (const key of ['fi-sender-firstName', 'fi-sender-lastName']) {
+        const value = fd.get(key);
+        if (typeof value === 'string') fd.set(key, value.replace(/[\u2018\u2019]/g, "'"));
+      }
+
+      isSubmitting = true;
       button.disabled = true;
-      button.textContent = 'Wird gesendet …';
-      feedback.textContent = '';
+      feedback.textContent = 'Deine Anfrage wird gesendet …';
       feedback.classList.remove('error', 'success');
 
       try {
-        const forminit = new window.Forminit();
-        const { error } = await forminit.submit(FORMINIT_FORM_ID, new FormData(form));
+        const { data, error } = await forminit.submit(FORM_ID, fd);
 
-        if (error) throw new Error(error.message || 'Die Anfrage konnte nicht übermittelt werden.');
+        if (error) {
+          console.error('Forminit-Fehler:', error);
+          feedback.textContent = getErrorMessage(error);
+          feedback.classList.add('error');
+          return;
+        }
+
+        if (typeof data?.hashId !== 'string') {
+          console.error('Forminit hat keine gültige Bestätigung zurückgegeben:', data);
+          feedback.textContent = 'Deine Anfrage konnte leider nicht bestätigt werden. Bitte versuche es erneut.';
+          feedback.classList.add('error');
+          return;
+        }
 
         form.reset();
         renderFileLists();
         feedback.textContent = 'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
         feedback.classList.add('success');
-        button.textContent = 'Anfrage gesendet ✓';
       } catch (error) {
         console.error('Formular-Fehler:', error);
         feedback.textContent = 'Das hat leider nicht funktioniert. Bitte versuche es erneut oder schreibe direkt über Instagram.';
         feedback.classList.add('error');
-        button.innerHTML = originalButton;
+      } finally {
+        isSubmitting = false;
         button.disabled = false;
       }
     });
