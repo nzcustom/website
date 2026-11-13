@@ -468,7 +468,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   border: 0;
 }
 .choice-field legend {
-  margin-bottom: 13px;
+  margin-bottom: 0;
   color: #aeb8c2;
   font-size: 8px;
   font-weight: 700;
