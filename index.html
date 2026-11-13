@@ -14,6 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="assets/logo.png">	
+  <script src="https://forminit.com/sdk/v1/forminit.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -192,139 +193,175 @@
       </div>
 
       
-	<form class="contact-form" action="DEIN_FORMULAR-ENDPOINT" method="POST" enctype="multipart/form-data">
-	
-	  <h3>Persönliche Angaben</h3>
-	
-	  <label for="first-name">Vorname *</label>
-	  <input type="text" id="first-name" name="first-name" required>
-	
-	  <label for="last-name">Nachname *</label>
-	  <input type="text" id="last-name" name="last-name" required>
-	
-	  <label for="email">E-Mail-Adresse *</label>
-	  <input type="email" id="email" name="email" required>
-	
-	  <label for="team">Eishockeyverein / Team</label>
-	  <input type="text" id="team" name="team">
-	
-	  <label for="country">Land *</label>
-	  <input type="text" id="country" name="country" required>
-	
-	  <label for="phone">Telefonnummer</label>
-	  <input type="tel" id="phone" name="phone">
-	
-	
-	  <h3>Angaben zur Maske</h3>
-	
-	  <label for="mask-brand">Maskenhersteller *</label>
-	  <select id="mask-brand" name="mask-brand" required>
-	    <option value="">Bitte auswählen</option>
-	    <option value="Bauer">Bauer</option>
-	    <option value="CCM">CCM</option>
-	    <option value="Warrior">Warrior</option>
-	    <option value="Pro's Choice">Pro's Choice</option>
-	    <option value="Wall">Wall</option>
-	    <option value="Andere">Andere</option>
-	  </select>
-	
-	  <label for="mask-model">Modell</label>
-	  <input type="text" id="mask-model" name="mask-model"
-	    placeholder="z. B. Bauer 960, CCM Axis XF Pro, Warrior F2 Pro">
-	
-	  <label>Handelt es sich um eine Youth- oder Junior-Maske?</label>
-	  <label>
-	    <input type="radio" name="youth-junior" value="Ja"> Ja
-	  </label>
-	  <label>
-	    <input type="radio" name="youth-junior" value="Nein"> Nein
-	  </label>
-	
-	  <label for="other-object">Andere Objekte</label>
-	  <input type="text" id="other-object" name="other-object"
-	    placeholder="z. B. Skihelm oder andere Ausrüstung">
-	
-	  <label>Ist die Maske neu oder gebraucht? *</label>
-	  <label>
-	    <input type="radio" name="mask-condition" value="Neu" required> Neu
-	  </label>
-	  <label>
-	    <input type="radio" name="mask-condition" value="Gebraucht"> Gebraucht
-	  </label>
-	
-	  <p class="form-hint">
-	    Je besser der Zustand der Maske ist, desto besser wird das Lackierergebnis
-	    und desto langlebiger ist die Lackierung. Bei einer gebrauchten Maske
-	    sende bitte nach Möglichkeit Bilder des aktuellen Zustands mit.
-	  </p>
-	
-	
-	  <h3>Dein Wunschdesign</h3>
-	
-	  <label for="design-description">Beschreibung deines Designs *</label>
-	
-	  <p class="form-hint">
-	    Überlege zunächst, was dich persönlich ausmacht. Das können dein Team,
-	    deine Heimatstadt, dein Spitzname, persönliche Interessen, Lieblingstiere
-	    oder bestimmte Symbole sein – oder einfach dein eigener Stil.
-	
-	    Die besten Torwartmasken-Designs spiegeln die Persönlichkeit des
-	    Torwarts wider, der sie trägt.
-	
-	    Lass dich von Sport, Natur, Filmen, Tattoos oder persönlichen Erlebnissen
-	    inspirieren. Du brauchst noch kein vollständig ausgearbeitetes Konzept.
-	    Schon ein paar Ideen oder grobe Skizzen reichen aus, um gemeinsam ein
-	    Design zu entwickeln, das wirklich zu dir passt.
-	  </p>
-	
-	  <textarea id="design-description" name="design-description"
-	    rows="6" required
-	    placeholder="Beschreibe hier deine Vorstellungen und Designideen ..."></textarea>
-	
-	
-	  <h3>Beschreibung der Rückplatte (Backplate)</h3>
-	
-	  <p class="form-hint">
-	    Die Rückplatte bietet besonders viel Platz für persönliche Details.
-	    Hier lassen sich beispielsweise wichtige Daten, Initialen, Namen,
-	    Rückennummern, Zitate oder Widmungen für besondere Menschen verewigen.
-	  </p>
-	
-	  <textarea id="backplate-description" name="backplate-description"
-	    rows="4"
-	    placeholder="Was möchtest du auf deiner Rückplatte haben?"></textarea>
-	
-	
-	  <h3>Skizzen und Bildvorlagen</h3>
-	
-	  <p class="form-hint">
-	    Lade hier gerne Referenzbilder, eigene Skizzen oder Bilder bereits
-	    vorhandener Masken-Designs hoch. Auch Fotos deiner gebrauchten Maske
-	    helfen bei der Einschätzung des Zustands.
-	  </p>
-	
-	  <label for="reference-images">Referenzbilder hochladen</label>
-	  <input type="file" id="reference-images" name="reference-images"
-	    accept="image/*" multiple>
-	
-	  <label for="sketch-images">Eigene Skizzen und Designentwürfe hochladen</label>
-	  <input type="file" id="sketch-images" name="sketch-images"
-	    accept="image/*" multiple>
-	
-	
-	  <h3>Weitere Informationen</h3>
-	
-	  <label for="deadline">Gewünschter Fertigstellungstermin</label>
-	  <input type="date" id="deadline" name="deadline">
-	
-	  <label for="additional-information">Weitere Wünsche oder Anmerkungen</label>
-	  <textarea id="additional-information" name="additional-information"
-	    rows="4"
-	    placeholder="Gibt es noch etwas, das ich wissen sollte?"></textarea>
-	
-	  <button type="submit">Anfrage absenden</button>
-	
-	</form>
+      <form class="contact-form" id="contact-form" method="POST" enctype="multipart/form-data">
+        <div class="form-topline">
+          <span>PROJECT INQUIRY</span>
+          <span><b>*</b> Pflichtfelder</span>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span class="form-section-number">01</span>
+            <h3>Persönliche Angaben</h3>
+          </div>
+
+          <div class="form-row">
+            <label class="field">
+              <span>Vorname <b>*</b></span>
+              <input type="text" name="fi-sender-firstName" autocomplete="given-name" placeholder="Dein Vorname" required>
+            </label>
+            <label class="field">
+              <span>Nachname <b>*</b></span>
+              <input type="text" name="fi-sender-lastName" autocomplete="family-name" placeholder="Dein Nachname" required>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">
+              <span>E-Mail-Adresse <b>*</b></span>
+              <input type="email" name="fi-sender-email" autocomplete="email" placeholder="name@beispiel.de" required>
+            </label>
+            <label class="field">
+              <span>Telefonnummer</span>
+              <input type="tel" name="fi-text-phone" autocomplete="tel" placeholder="+49 ...">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label class="field">
+              <span>Eishockeyverein / Team</span>
+              <input type="text" name="fi-text-team" placeholder="Dein Verein oder Team">
+            </label>
+            <label class="field">
+              <span>Land <b>*</b></span>
+              <input type="text" name="fi-text-country" autocomplete="country-name" placeholder="Dein Land" required>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span class="form-section-number">02</span>
+            <h3>Angaben zur Maske</h3>
+          </div>
+
+          <div class="form-row">
+            <label class="field">
+              <span>Maskenhersteller <b>*</b></span>
+              <select name="fi-select-mask-brand" required>
+                <option value="" selected disabled>Bitte auswählen</option>
+                <option value="Bauer">Bauer</option>
+                <option value="CCM">CCM</option>
+                <option value="Warrior">Warrior</option>
+                <option value="Pro's Choice">Pro's Choice</option>
+                <option value="Wall">Wall</option>
+                <option value="Andere Maske">Andere Maske</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Modell</span>
+              <input type="text" name="fi-text-mask-model" placeholder="z. B. Bauer 960, CCM Axis XF Pro ...">
+            </label>
+          </div>
+
+          <fieldset class="field choice-field">
+            <legend>Ist es eine Youth- oder Junior-Maske?</legend>
+            <div class="choice-options">
+              <label class="choice-option"><input type="radio" name="fi-radio-youth-junior" value="Ja"><span>Ja</span></label>
+              <label class="choice-option"><input type="radio" name="fi-radio-youth-junior" value="Nein"><span>Nein</span></label>
+            </div>
+          </fieldset>
+
+          <label class="field">
+            <span>Andere Objekte</span>
+            <input type="text" name="fi-text-other-object" placeholder="z. B. Skihelm oder andere Ausrüstung">
+          </label>
+
+          <fieldset class="field choice-field">
+            <legend>Ist die Maske neu oder gebraucht? <b>*</b></legend>
+            <div class="choice-options">
+              <label class="choice-option"><input type="radio" name="fi-radio-mask-condition" value="Neu" required><span>Neu</span></label>
+              <label class="choice-option"><input type="radio" name="fi-radio-mask-condition" value="Gebraucht"><span>Gebraucht</span></label>
+            </div>
+            <p class="field-note">Je besser der Zustand der Maske ist, desto besser kann das Lackierergebnis ausfallen und desto langlebiger ist die Lackierung. Bei einer gebrauchten Maske sende bitte nach Möglichkeit Fotos des aktuellen Zustands mit.</p>
+          </fieldset>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span class="form-section-number">03</span>
+            <h3>Dein Wunschdesign</h3>
+          </div>
+
+          <label class="field field-message">
+            <span>Beschreibung deines Designs <b>*</b></span>
+            <p class="field-note">Was macht dich einzigartig? Das können dein Team, deine Heimatstadt, dein Spitzname, persönliche Interessen, Lieblingstiere oder bestimmte Symbole sein – oder einfach dein eigener Stil. Lass dich von Sport, Natur, Filmen, Tattoos oder persönlichen Erlebnissen inspirieren. Du brauchst noch kein fertiges Konzept: Auch ein paar erste Ideen oder grobe Skizzen reichen aus, um gemeinsam ein Design zu entwickeln, das wirklich zu dir passt.</p>
+            <textarea name="fi-text-design-description" rows="6" placeholder="Erzähl mir von deinen Ideen, Vorstellungen und Inspirationen ..." required></textarea>
+          </label>
+
+          <label class="field field-message">
+            <span>Beschreibung der Rückplatte (Backplate)</span>
+            <p class="field-note">Die Rückplatte bietet besonders viel Platz für persönliche Details – zum Beispiel wichtige Daten, Initialen, Namen, Rückennummern, Zitate oder Widmungen für besondere Menschen.</p>
+            <textarea name="fi-text-backplate-description" rows="4" placeholder="Was möchtest du auf deiner Rückplatte haben?"></textarea>
+          </label>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span class="form-section-number">04</span>
+            <h3>Skizzen & Bildvorlagen</h3>
+          </div>
+          <p class="field-note upload-intro">Lade gerne Referenzbilder, eigene Skizzen oder Beispiele bereits vorhandener Masken-Designs hoch. Auch Fotos deiner gebrauchten Maske helfen mir, den Zustand einzuschätzen.</p>
+
+          <div class="upload-grid">
+            <div class="upload-field">
+              <label for="reference-images" class="upload-label">
+                <span class="upload-icon">＋</span>
+                <span class="upload-title">Referenzbilder hochladen</span>
+                <span class="upload-description">Bilder als Inspiration für dein Design</span>
+                <span class="upload-action">DATEIEN AUSWÄHLEN</span>
+              </label>
+              <input class="file-input" type="file" id="reference-images" name="fi-file-reference-images[]" accept="image/jpeg,image/png,image/webp" multiple>
+              <ul class="file-list" id="reference-file-list" aria-live="polite"></ul>
+            </div>
+
+            <div class="upload-field">
+              <label for="sketch-images" class="upload-label">
+                <span class="upload-icon">＋</span>
+                <span class="upload-title">Skizzen & Entwürfe hochladen</span>
+                <span class="upload-description">Eigene Zeichnungen oder bestehende Designs</span>
+                <span class="upload-action">DATEIEN AUSWÄHLEN</span>
+              </label>
+              <input class="file-input" type="file" id="sketch-images" name="fi-file-sketch-images[]" accept="image/jpeg,image/png,image/webp" multiple>
+              <ul class="file-list" id="sketch-file-list" aria-live="polite"></ul>
+            </div>
+          </div>
+          <p class="upload-limit">JPG, PNG oder WEBP · Maximal 25 MB insgesamt pro Anfrage</p>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-heading">
+            <span class="form-section-number">05</span>
+            <h3>Weitere Informationen</h3>
+          </div>
+          <div class="form-row">
+            <label class="field">
+              <span>Gewünschter Fertigstellungstermin</span>
+              <input type="date" name="fi-date-deadline">
+            </label>
+          </div>
+          <label class="field field-message">
+            <span>Weitere Wünsche oder Anmerkungen</span>
+            <textarea name="fi-text-additional-information" rows="4" placeholder="Gibt es noch etwas, das ich wissen sollte?"></textarea>
+          </label>
+        </div>
+
+        <div class="form-bottom">
+          <p>Mit <b>*</b> markierte Felder sind Pflichtfelder. Deine Angaben werden ausschließlich zur Bearbeitung deiner Anfrage verwendet.</p>
+          <button class="button button-chrome submit-button" type="submit">Anfrage absenden <span>↗</span></button>
+        </div>
+        <p class="form-feedback" role="status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
