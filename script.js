@@ -46,40 +46,62 @@
   }
 
   const form = document.querySelector('.contact-form');
+
   if (form) {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+
       const button = form.querySelector('button[type="submit"]');
       const feedback = form.querySelector('.form-feedback');
+
       if (!form.reportValidity()) return;
 
       const originalButton = button.innerHTML;
+
       button.disabled = true;
-      button.innerHTML = 'Wird gesendet …';
+      button.textContent = 'Wird gesendet …';
+
       feedback.textContent = '';
       feedback.classList.remove('error');
 
       try {
-        const formData = new FormData(form);
-        const body = new URLSearchParams();
-        for (const [key, value] of formData.entries()) body.append(key, value);
-
-        const response = await fetch(form.getAttribute('action') || '/', {
+        const response = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: body.toString()
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
         });
 
-        if (!response.ok) throw new Error('Formular konnte nicht gesendet werden.');
+        const result = await response.json();
+
+        if (!response.ok) {
+          const message = result.errors
+            ? result.errors.map(error => error.message).join(', ')
+            : 'Formular konnte nicht gesendet werden.';
+
+          throw new Error(message);
+        }
+
         form.reset();
-        feedback.textContent = 'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
-        button.innerHTML = 'Anfrage gesendet ✓';
+
+        feedback.textContent =
+          'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
+
+        button.textContent = 'Anfrage gesendet ✓';
+
       } catch (error) {
-        feedback.textContent = 'Das hat leider nicht funktioniert. Bitte versuche es erneut oder schreibe direkt über Instagram.';
+        console.error('Formspree-Fehler:', error);
+
+        feedback.textContent =
+          'Das hat leider nicht funktioniert. Bitte versuche es erneut oder schreibe direkt über Instagram.';
+
         feedback.classList.add('error');
+
         button.innerHTML = originalButton;
         button.disabled = false;
       }
     });
   }
+
 })();
