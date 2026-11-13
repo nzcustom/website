@@ -14,7 +14,6 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="assets/logo.png">	
-  <script src="https://forminit.com/sdk/v1/forminit.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -193,7 +192,11 @@
       </div>
 
       
-      <form class="contact-form" id="contact-form" method="POST" enctype="multipart/form-data">
+      <form class="contact-form" id="contact-form" action="https://formsubmit.co/fuzionfy@gmail.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="Neue Airbrush-Anfrage – NZ Custom Airbrush">
+        <input type="hidden" name="_next" id="form-next" value="">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_replyto" id="form-replyto" value="">
         <div class="form-topline">
           <span>PROJECT INQUIRY</span>
           <span><b>*</b> Pflichtfelder</span>
@@ -208,33 +211,33 @@
           <div class="form-row">
             <label class="field">
               <span>Vorname <b>*</b></span>
-              <input type="text" name="fi-sender-firstName" autocomplete="given-name" placeholder="Dein Vorname" required>
+              <input type="text" name="Vorname" autocomplete="given-name" placeholder="Dein Vorname" required>
             </label>
             <label class="field">
               <span>Nachname <b>*</b></span>
-              <input type="text" name="fi-sender-lastName" autocomplete="family-name" placeholder="Dein Nachname" required>
+              <input type="text" name="Nachname" autocomplete="family-name" placeholder="Dein Nachname" required>
             </label>
           </div>
 
           <div class="form-row">
             <label class="field">
               <span>E-Mail-Adresse <b>*</b></span>
-              <input type="email" name="fi-sender-email" autocomplete="email" placeholder="name@beispiel.de" required>
+              <input type="email" name="email" autocomplete="email" placeholder="name@beispiel.de" required>
             </label>
             <label class="field">
               <span>Telefonnummer</span>
-              <input type="tel" name="fi-text-phone" autocomplete="tel" placeholder="+49 ...">
+              <input type="tel" name="Telefonnummer" autocomplete="tel" placeholder="+49 ...">
             </label>
           </div>
 
           <div class="form-row">
             <label class="field">
               <span>Eishockeyverein / Team</span>
-              <input type="text" name="fi-text-team" placeholder="Dein Verein oder Team">
+              <input type="text" name="Verein oder Team" placeholder="Dein Verein oder Team">
             </label>
             <label class="field">
               <span>Land <b>*</b></span>
-              <input type="text" name="fi-text-country" autocomplete="country-name" placeholder="Dein Land" required>
+              <input type="text" name="Land" autocomplete="country-name" placeholder="Dein Land" required>
             </label>
           </div>
         </div>
@@ -248,7 +251,7 @@
           <div class="form-row">
             <label class="field">
               <span>Maskenhersteller <b>*</b></span>
-              <select name="fi-select-mask-brand" required>
+              <select name="Maskenhersteller" required>
                 <option value="" selected disabled>Bitte auswählen</option>
                 <option value="Bauer">Bauer</option>
                 <option value="CCM">CCM</option>
@@ -260,28 +263,28 @@
             </label>
             <label class="field">
               <span>Modell</span>
-              <input type="text" name="fi-text-mask-model" placeholder="z. B. Bauer 960, CCM Axis XF Pro ...">
+              <input type="text" name="Maskenmodell" placeholder="z. B. Bauer 960, CCM Axis XF Pro ...">
             </label>
           </div>
 
           <fieldset class="field choice-field">
             <legend>Ist es eine Youth- oder Junior-Maske?</legend>
             <div class="choice-options">
-              <label class="choice-option"><input type="radio" name="fi-radio-youth-junior" value="Ja"><span>Ja</span></label>
-              <label class="choice-option"><input type="radio" name="fi-radio-youth-junior" value="Nein"><span>Nein</span></label>
+              <label class="choice-option"><input type="radio" name="Youth- oder Junior-Maske" value="Ja"><span>Ja</span></label>
+              <label class="choice-option"><input type="radio" name="Youth- oder Junior-Maske" value="Nein"><span>Nein</span></label>
             </div>
           </fieldset>
 
           <label class="field">
             <span>Andere Objekte</span>
-            <input type="text" name="fi-text-other-object" placeholder="z. B. Skihelm oder andere Ausrüstung">
+            <input type="text" name="Anderes Objekt" placeholder="z. B. Skihelm oder andere Ausrüstung">
           </label>
 
           <fieldset class="field choice-field">
             <legend>Ist die Maske neu oder gebraucht? <b>*</b></legend>
             <div class="choice-options">
-              <label class="choice-option"><input type="radio" name="fi-radio-mask-condition" value="Neu" required><span>Neu</span></label>
-              <label class="choice-option"><input type="radio" name="fi-radio-mask-condition" value="Gebraucht"><span>Gebraucht</span></label>
+              <label class="choice-option"><input type="radio" name="Zustand der Maske" value="Neu" required><span>Neu</span></label>
+              <label class="choice-option"><input type="radio" name="Zustand der Maske" value="Gebraucht"><span>Gebraucht</span></label>
             </div>
             <p class="field-note">Je besser der Zustand der Maske ist, desto besser kann das Lackierergebnis ausfallen und desto langlebiger ist die Lackierung. Bei einer gebrauchten Maske sende bitte nach Möglichkeit Fotos des aktuellen Zustands mit.</p>
           </fieldset>
@@ -296,13 +299,13 @@
           <label class="field field-message">
             <span>Beschreibung deines Designs <b>*</b></span>
             <p class="field-note">Was macht dich einzigartig? Das können dein Team, deine Heimatstadt, dein Spitzname, persönliche Interessen, Lieblingstiere oder bestimmte Symbole sein – oder einfach dein eigener Stil. Lass dich von Sport, Natur, Filmen, Tattoos oder persönlichen Erlebnissen inspirieren. Du brauchst noch kein fertiges Konzept: Auch ein paar erste Ideen oder grobe Skizzen reichen aus, um gemeinsam ein Design zu entwickeln, das wirklich zu dir passt.</p>
-            <textarea name="fi-text-design-description" rows="6" placeholder="Erzähl mir von deinen Ideen, Vorstellungen und Inspirationen ..." required></textarea>
+            <textarea name="Beschreibung des Wunschdesigns" rows="6" placeholder="Erzähl mir von deinen Ideen, Vorstellungen und Inspirationen ..." required></textarea>
           </label>
 
           <label class="field field-message">
             <span>Beschreibung der Rückplatte (Backplate)</span>
             <p class="field-note">Die Rückplatte bietet besonders viel Platz für persönliche Details – zum Beispiel wichtige Daten, Initialen, Namen, Rückennummern, Zitate oder Widmungen für besondere Menschen.</p>
-            <textarea name="fi-text-backplate-description" rows="4" placeholder="Was möchtest du auf deiner Rückplatte haben?"></textarea>
+            <textarea name="Beschreibung der Rückplatte" rows="4" placeholder="Was möchtest du auf deiner Rückplatte haben?"></textarea>
           </label>
         </div>
 
@@ -321,7 +324,7 @@
                 <span class="upload-description">Bilder als Inspiration für dein Design</span>
                 <span class="upload-action">DATEIEN AUSWÄHLEN</span>
               </label>
-              <input class="file-input" type="file" id="reference-images" name="fi-file-reference-images[]" accept="image/jpeg,image/png,image/webp" multiple>
+              <input class="file-input" type="file" id="reference-images" name="Referenzbilder" accept="image/jpeg,image/png,image/webp" multiple>
               <ul class="file-list" id="reference-file-list" aria-live="polite"></ul>
             </div>
 
@@ -332,11 +335,11 @@
                 <span class="upload-description">Eigene Zeichnungen oder bestehende Designs</span>
                 <span class="upload-action">DATEIEN AUSWÄHLEN</span>
               </label>
-              <input class="file-input" type="file" id="sketch-images" name="fi-file-sketch-images[]" accept="image/jpeg,image/png,image/webp" multiple>
+              <input class="file-input" type="file" id="sketch-images" name="Skizzen und Entwürfe" accept="image/jpeg,image/png,image/webp" multiple>
               <ul class="file-list" id="sketch-file-list" aria-live="polite"></ul>
             </div>
           </div>
-          <p class="upload-limit">JPG, PNG oder WEBP · Maximal 25 MB insgesamt pro Anfrage</p>
+          <p class="upload-limit">JPG, PNG oder WEBP · Maximal 10 MB insgesamt pro Anfrage</p>
         </div>
 
         <div class="form-section">
@@ -347,12 +350,12 @@
           <div class="form-row">
             <label class="field">
               <span>Gewünschter Fertigstellungstermin</span>
-              <input type="date" name="fi-date-deadline">
+              <input type="date" name="Gewünschter Fertigstellungstermin">
             </label>
           </div>
           <label class="field field-message">
             <span>Weitere Wünsche oder Anmerkungen</span>
-            <textarea name="fi-text-additional-information" rows="4" placeholder="Gibt es noch etwas, das ich wissen sollte?"></textarea>
+            <textarea name="Weitere Wünsche und Anmerkungen" rows="4" placeholder="Gibt es noch etwas, das ich wissen sollte?"></textarea>
           </label>
         </div>
 
