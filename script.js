@@ -30,7 +30,6 @@
   const year = document.querySelector('#year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Kleine, dezente Scroll-Reveals; bei reduzierter Bewegung bleibt alles sichtbar.
   const revealItems = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const observer = new IntersectionObserver((entries, currentObserver) => {
@@ -46,8 +45,6 @@
     revealItems.forEach((item) => item.classList.add('is-visible'));
   }
 
-  // Netlify Forms: AJAX-Versand mit sichtbarer Rückmeldung.
-  // Netlify erkennt das Formular anhand von data-netlify und form-name beim Deploy.
   const form = document.querySelector('.contact-form');
   if (form) {
     form.addEventListener('submit', async (event) => {
