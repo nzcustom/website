@@ -48,6 +48,48 @@
   const form = document.querySelector('.contact-form');
 
   if (form) {
+    // Forminit: ID nach dem Erstellen des Formulars im Dashboard eintragen.
+    const FORMINIT_FORM_ID = 'DEINE_FORMINIT_FORM_ID';
+
+    const uploadInputs = [
+      {
+        input: form.querySelector('#reference-images'),
+        list: form.querySelector('#reference-file-list')
+      },
+      {
+        input: form.querySelector('#sketch-images'),
+        list: form.querySelector('#sketch-file-list')
+      }
+    ];
+
+    const maxTotalSize = 25 * 1024 * 1024;
+
+    const formatSize = (bytes) => {
+      if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+      return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+    };
+
+    const renderFileLists = () => {
+      uploadInputs.forEach(({ input, list }) => {
+        if (!input || !list) return;
+        list.innerHTML = '';
+
+        Array.from(input.files || []).forEach((file) => {
+          const item = document.createElement('li');
+          const name = document.createElement('span');
+          const size = document.createElement('small');
+          name.textContent = file.name;
+          size.textContent = formatSize(file.size);
+          item.append(name, size);
+          list.appendChild(item);
+        });
+      });
+    };
+
+    uploadInputs.forEach(({ input }) => {
+      if (input) input.addEventListener('change', renderFileLists);
+    });
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
@@ -56,56 +98,52 @@
 
       if (!form.reportValidity()) return;
 
-      const originalButton = button.innerHTML;
+      const totalSize = uploadInputs.reduce((total, { input }) => {
+        return total + Array.from(input?.files || []).reduce((sum, file) => sum + file.size, 0);
+      }, 0);
 
+      if (totalSize > maxTotalSize) {
+        feedback.textContent = 'Die ausgewählten Bilder sind zusammen größer als 25 MB. Bitte wähle weniger oder kleinere Dateien aus.';
+        feedback.classList.add('error');
+        return;
+      }
+
+      if (FORMINIT_FORM_ID === 'DEINE_FORMINIT_FORM_ID') {
+        feedback.textContent = 'Bitte trage zuerst deine Forminit-Formular-ID in der script.js ein.';
+        feedback.classList.add('error');
+        return;
+      }
+
+      if (typeof window.Forminit !== 'function') {
+        feedback.textContent = 'Das Formular konnte gerade nicht geladen werden. Bitte lade die Seite neu und versuche es erneut.';
+        feedback.classList.add('error');
+        return;
+      }
+
+      const originalButton = button.innerHTML;
       button.disabled = true;
       button.textContent = 'Wird gesendet …';
-
       feedback.textContent = '';
-      feedback.classList.remove('error');
+      feedback.classList.remove('error', 'success');
 
       try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok && result.ok) {
-          form.reset();
-          feedback.textContent =
-            'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
-          button.textContent = 'Anfrage gesendet ✓';
-        } else {
-          throw new Error(
-            result.errors?.map(error => error.message).join(', ')
-            || 'Unbekannter Fehler'
-          );
-        }
+        const forminit = new window.Forminit();
+        const { error } = await forminit.submit(FORMINIT_FORM_ID, new FormData(form));
+
+        if (error) throw new Error(error.message || 'Die Anfrage konnte nicht übermittelt werden.');
 
         form.reset();
-
-        feedback.textContent =
-          'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
-
+        renderFileLists();
+        feedback.textContent = 'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
+        feedback.classList.add('success');
         button.textContent = 'Anfrage gesendet ✓';
-
       } catch (error) {
-        console.error('Formspree-Fehler:', error);
-
-        feedback.textContent =
-          'Das hat leider nicht funktioniert. Bitte versuche es erneut oder schreibe direkt über Instagram.';
-
+        console.error('Formular-Fehler:', error);
+        feedback.textContent = 'Das hat leider nicht funktioniert. Bitte versuche es erneut oder schreibe direkt über Instagram.';
         feedback.classList.add('error');
-
         button.innerHTML = originalButton;
         button.disabled = false;
       }
     });
   }
-
 })();
