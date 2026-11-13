@@ -476,11 +476,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   letter-spacing: 1.7px;
   text-transform: uppercase;
 }
-.choice-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice-options { display: flex; flex-wrap: wrap; gap: 24px; }
 .choice-option {
   display: inline-flex;
   align-items: center;
-  gap: 24px;
+  gap: 9px;
   min-width: 100px;
   padding: 10px 14px;
   border: 1px solid rgba(215,225,236,.14);
