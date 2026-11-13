@@ -72,15 +72,19 @@
             'Accept': 'application/json'
           }
         });
-
+        
         const result = await response.json();
-
-        if (!response.ok) {
-          const message = result.errors
-            ? result.errors.map(error => error.message).join(', ')
-            : 'Formular konnte nicht gesendet werden.';
-
-          throw new Error(message);
+        
+        if (response.ok && result.ok) {
+          form.reset();
+          feedback.textContent =
+            'Vielen Dank! Deine Anfrage wurde erfolgreich gesendet.';
+          button.textContent = 'Anfrage gesendet ✓';
+        } else {
+          throw new Error(
+            result.errors?.map(error => error.message).join(', ')
+            || 'Unbekannter Fehler'
+          );
         }
 
         form.reset();
