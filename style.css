@@ -428,3 +428,155 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .hero h1 { font-size:54px; }
   .hero-bottom { letter-spacing:.4px; }
 }
+
+/* --- NZ CUSTOM AIRBRUSH: erweitertes Anfrageformular --- */
+.form-section {
+  padding: 34px 0 12px;
+  border-top: 1px solid var(--line);
+}
+.form-section:first-of-type { border-top: 0; padding-top: 4px; }
+.form-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 27px;
+}
+.form-section-number {
+  color: #75818d;
+  font: 600 9px 'Manrope', sans-serif;
+  letter-spacing: 1.6px;
+}
+.form-section-heading h3 {
+  margin: 0;
+  color: #e6ebf0;
+  font: 700 13px 'Manrope', sans-serif;
+  letter-spacing: .3px;
+}
+.field > span b, .form-topline b, .form-bottom b, .choice-field legend b { color: #e7edf3; }
+.field-note {
+  display: block;
+  margin: -2px 0 8px;
+  color: #818c98;
+  font-size: 10px;
+  line-height: 1.85;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.choice-field {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+.choice-field legend {
+  margin-bottom: 13px;
+  color: #aeb8c2;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+.choice-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.choice-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 100px;
+  padding: 10px 14px;
+  border: 1px solid rgba(215,225,236,.14);
+  border-radius: 999px;
+  color: #c3ccd5;
+  background: rgba(255,255,255,.018);
+  font-size: 10px;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+.choice-option:has(input:checked) {
+  border-color: rgba(225,234,243,.58);
+  background: rgba(225,234,243,.08);
+  color: #f4f6f8;
+}
+.choice-option input {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  accent-color: #dce3e9;
+}
+.upload-intro { max-width: 700px; margin: -8px 0 22px; }
+.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.upload-field { min-width: 0; }
+.upload-label {
+  min-height: 168px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 22px;
+  border: 1px dashed rgba(215,225,236,.27);
+  border-radius: 15px;
+  background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008));
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.upload-label:hover {
+  border-color: rgba(235,242,249,.65);
+  background: rgba(255,255,255,.045);
+  transform: translateY(-2px);
+}
+.upload-icon { color: #dce3e9; font-size: 24px; line-height: 1; font-weight: 300; }
+.upload-title { color: #e4e9ee; font: 600 11px 'Manrope', sans-serif; }
+.upload-description { color: #7e8995; font-size: 9px; }
+.upload-action {
+  margin-top: 5px;
+  padding: 7px 12px;
+  border: 1px solid rgba(225,234,243,.27);
+  border-radius: 999px;
+  color: #cbd3dc;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+.file-input:focus-visible + .file-list { outline: 1px solid #dce3e9; }
+.file-list {
+  display: grid;
+  gap: 5px;
+  margin: 9px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.file-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 10px;
+  border: 1px solid rgba(215,225,236,.1);
+  border-radius: 7px;
+  color: #aeb8c2;
+  background: rgba(255,255,255,.025);
+  font-size: 9px;
+  overflow-wrap: anywhere;
+}
+.file-list small { flex: 0 0 auto; color: #74808c; }
+.upload-limit { margin: 12px 0 0; color: #697580; font-size: 8px; letter-spacing: .5px; }
+.form-feedback { min-height: 18px; }
+.form-feedback.success { color: #dce5ed; }
+.submit-button:disabled { opacity: .55; cursor: wait; transform: none; }
+@media (max-width: 640px) {
+  .form-section { padding-top: 28px; }
+  .upload-grid { grid-template-columns: 1fr; }
+  .upload-label { min-height: 145px; }
+  .choice-options { gap: 8px; }
+  .choice-option { min-width: 92px; }
+}
