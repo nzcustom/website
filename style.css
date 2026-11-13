@@ -476,7 +476,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   letter-spacing: 1.7px;
   text-transform: uppercase;
 }
-.choice-options { display: flex; flex-wrap: wrap; gap: 24px; }
+.choice-options { display: flex; flex-wrap: wrap; gap: 9px; }
 .choice-option {
   display: inline-flex;
   align-items: center;
