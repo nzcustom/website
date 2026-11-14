@@ -355,6 +355,35 @@ button, a { -webkit-tap-highlight-color: transparent; }
     object-position: center;
 }
 
+.choice-field {
+  display: block !important;
+  min-width: 0;
+  margin-top: 32px !important;
+  margin-bottom: 29px;
+  padding: 0;
+  border: 0;
+}
+
+.choice-field legend {
+  display: block;
+  width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  color: #aeb8c2;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.choice-field .choice-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   .reveal { opacity:1; transform:none; }
@@ -429,7 +458,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .hero-bottom { letter-spacing:.4px; }
 }
 
-/* --- NZ CUSTOM AIRBRUSH: erweitertes Anfrageformular --- */
 .form-section {
   padding: 34px 0 12px;
   border-top: 1px solid var(--line);
@@ -580,33 +608,4 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .upload-label { min-height: 145px; }
   .choice-options { gap: 8px; }
   .choice-option { min-width: 92px; }
-}
-
-.choice-field {
-  display: block !important;
-  min-width: 0;
-  margin-top: 32px !important;
-  margin-bottom: 29px;
-  padding: 0;
-  border: 0;
-}
-
-.choice-field legend {
-  display: block;
-  width: 100%;
-  margin: 0 0 12px;
-  padding: 0;
-  color: #aeb8c2;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 1.7px;
-  text-transform: uppercase;
-}
-
-.choice-field .choice-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin: 0;
-  padding: 0;
 }
