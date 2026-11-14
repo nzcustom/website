@@ -582,14 +582,24 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .choice-option { min-width: 92px; }
 }
 
-.choice-field {
-  gap: 0;
+fieldset.choice-field {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  margin-top: 32px !important;
+  padding: 0 !important;
 }
 
-.choice-field legend {
-  margin-bottom: 12px;
+fieldset.choice-field legend {
+  display: block !important;
+  float: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-.choice-options {
-  margin-top: 0;
+fieldset.choice-field .choice-options {
+  display: flex !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
