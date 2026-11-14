@@ -581,3 +581,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .choice-options { gap: 8px; }
   .choice-option { min-width: 92px; }
 }
+
+.choice-field {
+  gap: 0;
+}
+
+.choice-field legend {
+  margin-bottom: 12px;
+}
+
+.choice-options {
+  margin-top: 0;
+}
