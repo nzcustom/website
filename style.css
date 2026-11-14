@@ -358,7 +358,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .choice-field {
   display: block !important;
   min-width: 0;
-  margin-top: 32px !important;
+  margin-top: 0 !important;
   margin-bottom: 29px;
   padding: 0;
   border: 0;
@@ -367,7 +367,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .choice-field legend {
   display: block;
   width: 100%;
-  margin: 0 0 12px;
+  margin: 0;
   padding: 0;
   color: #aeb8c2;
   font-size: 8px;
@@ -376,12 +376,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
   text-transform: uppercase;
 }
 
+.choice-field legend span {
+  display: block;
+  padding-bottom: 12px;
+}
+
 .choice-field .choice-options {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
   margin: 0;
   padding: 0;
+}
+
+.choice-field .field-note {
+  margin: 10px 0 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
